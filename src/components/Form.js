@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Error from "./Error";
 
-const Form = ({ setQueryTerm }) => {
+const Form = ({ setQueryTerm, setActualPage }) => {
     // State for search term
     const [search, setSearch] = useState("");
 
@@ -24,6 +24,7 @@ const Form = ({ setQueryTerm }) => {
 
         setError(false);
         setQueryTerm(search);
+        setActualPage(1);
     };
 
     return (

@@ -44,7 +44,10 @@ function App() {
         <div className="container">
             <div className="jumbotron">
                 <p className="lead text-center">Image Search</p>
-                <Form setQueryTerm={setQueryTerm} />
+                <Form
+                    setActualPage={setActualPage}
+                    setQueryTerm={setQueryTerm}
+                />
             </div>
             <div className="row justify-content-center">
                 <ImageList imageResult={imageResult} />
