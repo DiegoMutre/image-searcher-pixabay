@@ -1,4 +1,14 @@
+import { useState } from "react";
+
 const Form = () => {
+    // State for search term
+    const [search, setSearch] = useState("");
+
+    // Take the input value
+    const handleInputChange = e => {
+        setSearch(e.target.value);
+    };
+
     return (
         <form>
             <div className="row">
@@ -7,6 +17,8 @@ const Form = () => {
                         type="text"
                         className="form-control form-control-lg"
                         placeholder="Search a image E.g. Soccer or coffee"
+                        value={search}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="form-group col-md-4">
