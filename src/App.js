@@ -26,10 +26,35 @@ function App() {
                 const res = await fetch(url);
                 const data = await res.json();
                 setImageResult(data.hits);
+
+                const calculateTotalPages = Math.ceil(
+                    data.totalHits / imagesPerPage
+                );
+                setTotalPages(calculateTotalPages);
+
+                const $jumbotron = document.querySelector(".jumbotron");
+                $jumbotron.scrollIntoView({ behavior: "smooth" });
             };
             fetchResults();
         }
     }, [queryTerm, actualPage]);
+
+    // When the user clicks prev page button
+    const prevPage = _ => {
+        const newPage = actualPage - 1;
+        if (newPage < 1) return;
+
+        setActualPage(newPage);
+    };
+
+    // When the user clicks next page button
+    const nextPage = _ => {
+        const newPage = actualPage + 1;
+
+        if (newPage > totalPages) return;
+
+        setActualPage(newPage);
+    };
 
     return (
         <div className="container">
@@ -39,6 +64,16 @@ function App() {
             </div>
             <div className="row justify-content-center">
                 <ImageList imageResult={imageResult} />
+                {actualPage > 1 && (
+                    <button className="btn btn-info mr-1" onClick={prevPage}>
+                        &laquo; Previous
+                    </button>
+                )}
+                {actualPage !== totalPages && imageResult.length ? (
+                    <button className="btn btn-info mr-1" onClick={nextPage}>
+                        Next &raquo;
+                    </button>
+                ) : null}
             </div>
         </div>
     );
