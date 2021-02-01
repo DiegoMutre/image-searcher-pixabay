@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Error from "./Error";
 
-const Form = () => {
+const Form = ({ setQueryTerm }) => {
     // State for search term
     const [search, setSearch] = useState("");
 
@@ -23,6 +23,7 @@ const Form = () => {
         }
 
         setError(false);
+        setQueryTerm(search);
     };
 
     return (
