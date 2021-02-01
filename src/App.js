@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "./components/Button";
 import Form from "./components/Form";
 import ImageList from "./components/ImageList";
 
@@ -39,23 +40,6 @@ function App() {
         }
     }, [queryTerm, actualPage]);
 
-    // When the user clicks prev page button
-    const prevPage = _ => {
-        const newPage = actualPage - 1;
-        if (newPage < 1) return;
-
-        setActualPage(newPage);
-    };
-
-    // When the user clicks next page button
-    const nextPage = _ => {
-        const newPage = actualPage + 1;
-
-        if (newPage > totalPages) return;
-
-        setActualPage(newPage);
-    };
-
     return (
         <div className="container">
             <div className="jumbotron">
@@ -65,14 +49,22 @@ function App() {
             <div className="row justify-content-center">
                 <ImageList imageResult={imageResult} />
                 {actualPage > 1 && (
-                    <button className="btn btn-info mr-1" onClick={prevPage}>
-                        &laquo; Previous
-                    </button>
+                    <Button
+                        action="previous"
+                        actualPage={actualPage}
+                        setActualPage={setActualPage}
+                        textContent="<< Previous"
+                        totalPages={totalPages}
+                    />
                 )}
                 {actualPage !== totalPages && imageResult.length ? (
-                    <button className="btn btn-info mr-1" onClick={nextPage}>
-                        Next &raquo;
-                    </button>
+                    <Button
+                        action="next"
+                        actualPage={actualPage}
+                        setActualPage={setActualPage}
+                        textContent="Next >>"
+                        totalPages={totalPages}
+                    />
                 ) : null}
             </div>
         </div>
