@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
-import ImageList from "./components/ImageList";
+import ImageContainer from "./components/ImageContainer";
 
 function App() {
     // State for query term
@@ -16,6 +16,9 @@ function App() {
     // State for image result
     const [imageResult, setImageResult] = useState([]);
 
+    // State for error
+    const [error, setError] = useState(false);
+
     // Fetch the api when queryTerm changes
     useEffect(() => {
         if (queryTerm) {
@@ -26,8 +29,15 @@ function App() {
 
                 const res = await fetch(url);
                 const data = await res.json();
-                setImageResult(data.hits);
 
+                if (!data.hits.length) {
+                    setImageResult([]);
+                    setError(true);
+                    return;
+                }
+
+                setError(false);
+                setImageResult(data.hits);
                 const calculateTotalPages = Math.ceil(
                     data.totalHits / imagesPerPage
                 );
@@ -50,7 +60,8 @@ function App() {
                 />
             </div>
             <div className="row justify-content-center">
-                <ImageList imageResult={imageResult} />
+                <ImageContainer imageResult={imageResult} error={error} />
+
                 {actualPage > 1 && (
                     <Button
                         action="previous"
