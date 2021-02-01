@@ -23,7 +23,7 @@ function App() {
     useEffect(() => {
         if (queryTerm) {
             const fetchResults = async _ => {
-                const apiKey = "18711312-b9d117ea3478ecfa5f02326d9";
+                const apiKey = process.env.REACT_APP_API_KEY;
                 const imagesPerPage = 30;
                 const url = `https://pixabay.com/api/?key=${apiKey}&q=${queryTerm}&page=${actualPage}&per_page=${imagesPerPage}`;
 
