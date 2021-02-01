@@ -1,16 +1,32 @@
 import { useState } from "react";
+import Error from "./Error";
 
 const Form = () => {
     // State for search term
     const [search, setSearch] = useState("");
+
+    // State for error
+    const [error, setError] = useState(false);
 
     // Take the input value
     const handleInputChange = e => {
         setSearch(e.target.value);
     };
 
+    // Validate form
+    const handleFormSubmit = e => {
+        e.preventDefault();
+
+        if (search.trim().length < 3) {
+            setError(true);
+            return;
+        }
+
+        setError(false);
+    };
+
     return (
-        <form>
+        <form onSubmit={handleFormSubmit}>
             <div className="row">
                 <div className="form-group col-md-8">
                     <input
@@ -29,6 +45,7 @@ const Form = () => {
                     />
                 </div>
             </div>
+            {error && <Error message="Add a search term" />}
         </form>
     );
 };
