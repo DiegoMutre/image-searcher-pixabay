@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Form from "./components/Form";
+import ImageList from "./components/ImageList";
 
 function App() {
     // State for query term
@@ -35,6 +36,9 @@ function App() {
             <div className="jumbotron">
                 <p className="lead text-center">Image Search</p>
                 <Form setQueryTerm={setQueryTerm} />
+            </div>
+            <div className="row justify-content-center">
+                <ImageList imageResult={imageResult} />
             </div>
         </div>
     );
