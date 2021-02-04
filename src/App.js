@@ -29,12 +29,12 @@ function App() {
             <div className="jumbotron">
                 <p className="lead text-center">Image Search</p>
                 <Form
-                    // setActualPage={setActualPage}
+                    setActualPage={setActualPage}
                     setQueryTerm={setQueryTerm}
                 />
             </div>
             <div className="row justify-content-center">
-                {/* <ImageContainer /> */}
+                <ImageContainer hits={hits || []} hasError={hasError} />
 
                 {/* {actualPage > 1 && (
                     <Button
