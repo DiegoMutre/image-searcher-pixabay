@@ -36,24 +36,20 @@ function App() {
             <div className="row justify-content-center">
                 <ImageContainer hits={hits || []} hasError={hasError} />
 
-                {/* {actualPage > 1 && (
+                {actualPage > 1 && (
                     <Button
                         action="previous"
-                        actualPage={actualPage}
                         setActualPage={setActualPage}
                         textContent="<< Previous"
-                        totalPages={totalPages}
                     />
                 )}
-                {actualPage !== totalPages && imageResult.length ? (
+                {actualPage < totalPages && (
                     <Button
                         action="next"
-                        actualPage={actualPage}
                         setActualPage={setActualPage}
                         textContent="Next >>"
-                        totalPages={totalPages}
                     />
-                ) : null} */}
+                )}
             </div>
         </div>
     );
