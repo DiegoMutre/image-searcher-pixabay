@@ -15,37 +15,14 @@ function App() {
     const [{ hits, totalHits }, actualPage, setActualPage] = useImage(
         queryTerm
     );
+    const totalPages = Math.round(totalHits / 30);
 
-    // // Fetch the api when queryTerm changes
-    // useEffect(() => {
-    //     if (queryTerm) {
-    //         const fetchResults = async _ => {
-    //             const apiKey = process.env.REACT_APP_API_KEY;
-    //             const imagesPerPage = 30;
-    //             const url = `https://pixabay.com/api/?key=${apiKey}&q=${queryTerm}&page=${actualPage}&per_page=${imagesPerPage}`;
-
-    //             const res = await fetch(url);
-    //             const data = await res.json();
-
-    //             if (!data.hits.length) {
-    //                 setImageResult([]);
-    //                 setHasError(true);
-    //                 return;
-    //             }
-
-    //             setHasError(false);
-    //             setImageResult(data.hits);
-    //             const calculateTotalPages = Math.ceil(
-    //                 data.totalHits / imagesPerPage
-    //             );
-    //             setTotalPages(calculateTotalPages);
-
-    //             const $jumbotron = document.querySelector(".jumbotron");
-    //             $jumbotron.scrollIntoView({ behavior: "smooth" });
-    //         };
-    //         fetchResults();
-    //     }
-    // }, [queryTerm, actualPage]);
+    // If there are no results
+    useEffect(() => {
+        if (queryTerm) {
+            return totalHits <= 0 ? setHasError(true) : setHasError(false);
+        }
+    }, [totalHits, queryTerm]);
 
     return (
         <div className="container">
