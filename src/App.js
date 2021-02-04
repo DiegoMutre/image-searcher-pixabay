@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
 import ImageContainer from "./components/ImageContainer";
+import { useImage } from "./hooks/useImage";
 
 function App() {
     // State for query term
@@ -9,6 +10,11 @@ function App() {
 
     // State for error
     const [hasError, setHasError] = useState(false);
+
+    // Use Custom hook
+    const [{ hits, totalHits }, actualPage, setActualPage] = useImage(
+        queryTerm
+    );
 
     // // Fetch the api when queryTerm changes
     // useEffect(() => {
