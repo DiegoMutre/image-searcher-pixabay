@@ -1,10 +1,10 @@
 import Image from "./Image";
 
-const ImageList = ({ imageResult }) => {
+const ImageList = ({ hits }) => {
     return (
         <div className="col-12 p-5 row">
-            {imageResult.map(image => (
-                <Image image={image} key={image.id} />
+            {hits.map(hit => (
+                <Image hit={hit} key={hit.id} />
             ))}
         </div>
     );
