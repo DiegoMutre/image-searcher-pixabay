@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Image = ({ hit: { previewURL, tags, likes, views, largeImageURL } }) => {
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 animate__animated animate__fadeIn">
@@ -20,6 +22,10 @@ const Image = ({ hit: { previewURL, tags, likes, views, largeImageURL } }) => {
             </div>
         </div>
     );
+};
+
+Image.propTypes = {
+    hit: PropTypes.object.isRequired,
 };
 
 export default Image;
