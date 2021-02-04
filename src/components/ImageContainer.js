@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import Error from "./Error";
 import ImageList from "./ImageList";
 
-const ImageContainer = ({ imageResult, error }) => {
+const ImageContainer = ({ imageResult, hasError }) => {
     // if there no is result
-    if (error) {
+    if (hasError) {
         return <Error message="No Results" />;
     }
 
