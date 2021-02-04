@@ -1,30 +1,26 @@
 import PropTypes from "prop-types";
 
-const Button = ({
-    actualPage,
-    setActualPage,
-    action,
-    textContent,
-    totalPages,
-}) => {
+const Button = ({ action, setActualPage, textContent }) => {
     // Initialize variable
     let handleButtonClick;
+
+    // Go to jumbotron position
+    const goUp = () => {
+        const $jumbotron = document.querySelector(".jumbotron");
+        $jumbotron.scrollIntoView({ behavior: "smooth" });
+    };
 
     // Check the action, should be previous or next
     if (action === "previous") {
         handleButtonClick = () => {
-            const newPage = actualPage - 1;
-            if (newPage < 1) return;
-
-            setActualPage(newPage);
+            setActualPage(prev => prev - 1);
+            goUp();
         };
-    } else if (action === "next") {
+    }
+    if (action === "next") {
         handleButtonClick = () => {
-            const newPage = actualPage + 1;
-
-            if (newPage > totalPages) return;
-
-            setActualPage(newPage);
+            setActualPage(prev => prev + 1);
+            goUp();
         };
     }
 
@@ -36,11 +32,9 @@ const Button = ({
 };
 
 Button.propTypes = {
-    actualPage: PropTypes.number.isRequired,
-    setActualPage: PropTypes.func.isRequired,
     action: PropTypes.string.isRequired,
+    setActualPage: PropTypes.func.isRequired,
     textContent: PropTypes.string.isRequired,
-    totalPages: PropTypes.number.isRequired,
 };
 
 export default Button;
