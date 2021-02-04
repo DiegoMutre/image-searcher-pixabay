@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import Error from "./Error";
 
 const Form = ({ setQueryTerm, setActualPage }) => {
@@ -50,6 +51,11 @@ const Form = ({ setQueryTerm, setActualPage }) => {
             {error && <Error message="Add a search term" />}
         </form>
     );
+};
+
+Form.propTypes = {
+    setQueryTerm: PropTypes.func.isRequired,
+    setActualPage: PropTypes.func.isRequired,
 };
 
 export default Form;
